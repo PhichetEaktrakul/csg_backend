@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: csg # Sets the name of the Spring Boot application to "csg"
+
+  datasource:
+    url: ${SPRING_DATASOURCE_URL} # Database Connection URL
+    username: ${SPRING_DATASOURCE_USERNAME} # Database username
+    password: ${SPRING_DATASOURCE_PASSWORD} # Database password
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver # SQL Server JDBC driver class
+
+  jpa:
+    hibernate:
+      ddl-auto: update # Auto schema update
+    show-sql: true # Show SQL statements in logs
+    database-platform: org.hibernate.dialect.SQLServerDialect # SQL Server dialect
+
+  jackson:
+    time-zone: Asia/Bangkok
+
+cors:
+  allowed-origins: ${ALLOWED_ORIGINS:http://localhost:5200}
+
+myapp:
+  api:
+    url: "http://localhost:5200"
+
+server:
+  error:
+    include-message: always # Include exception messages in error responses
+  port: ${SERVER_PORT:8040} # Server Port

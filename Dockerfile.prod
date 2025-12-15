@@ -1,0 +1,31 @@
+FROM eclipse-temurin:21-jdk-alpine AS builder
+
+WORKDIR /app
+
+COPY csg_backend/gradlew .
+
+COPY csg_backend/gradlew.bat .
+
+COPY csg_backend/gradle ./gradle
+
+COPY csg_backend/build.gradle.kts .
+
+COPY csg_backend/settings.gradle.kts .
+
+COPY csg_backend/src ./src
+
+RUN apk add --no-cache bash
+
+RUN chmod +x gradlew
+
+RUN ./gradlew build -x test
+
+FROM eclipse-temurin:21-jdk-alpine
+
+WORKDIR /app
+
+COPY --from=builder /app/build/libs/*.jar app.jar
+
+EXPOSE 8080
+
+ENTRYPOINT ["java","-jar","app.jar"]
