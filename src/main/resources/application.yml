@@ -27,4 +27,4 @@ myapp:
 server:
   error:
     include-message: always # Include exception messages in error responses
-  port: ${SERVER_PORT:8040} # Server Port
+  port: 8040 # Server Port

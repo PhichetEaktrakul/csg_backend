@@ -7,7 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("interest")
+@RequestMapping("/api/interest")
 class InterestController(private val jdbcTemplate: JdbcTemplate) {
 
     // ================= Get List of Payable Interest by id =====================

@@ -7,7 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("redeem")
+@RequestMapping("/api/redeem")
 class RedeemController(private val jdbcTemplate: JdbcTemplate) {
 
     // ================= Get list of Redeemable pledge by id ==================
@@ -15,7 +15,7 @@ class RedeemController(private val jdbcTemplate: JdbcTemplate) {
     fun getRedeemablePledgeByID(@PathVariable id: String): ResponseEntity<Any> {
         val sql =
                 """
-                SELECT * FROM View_Redeemable_Consignment
+                SELECT * FROM View_Redeemable_Pledge
                 WHERE customer_id = ?
                 ORDER BY end_date ASC
                 """

@@ -6,7 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("tos")
+@RequestMapping("/api/tos")
 class TermsServiceController(private val jdbcTemplate: JdbcTemplate) {
 
     // ================= Check if Customer already accept TOS ===================

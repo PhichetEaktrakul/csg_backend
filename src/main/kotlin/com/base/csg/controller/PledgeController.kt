@@ -10,13 +10,13 @@ import org.springframework.jdbc.core.simple.SimpleJdbcCall
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("pledge")
+@RequestMapping("/api/pledge")
 class PledgeController(private val jdbcTemplate: JdbcTemplate) {
 
     // ========================================================================
     @PostMapping("/create")
     fun newPledgeTransaction(@RequestBody req: PledgeRequest): ResponseEntity<Any> {
-        val sql = "{call New_Consignment_Transaction(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}"
+        val sql = "{call New_Pledge_Transaction(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}"
 
         return try {
             val result =
@@ -45,7 +45,7 @@ class PledgeController(private val jdbcTemplate: JdbcTemplate) {
     fun getPledgeHistoryByID(@PathVariable id: String): ResponseEntity<Any> {
         val sql =
                 """
-                SELECT * FROM View_Consignment_History
+                SELECT * FROM View_Pledge_History
                 WHERE customer_id = ?
                 ORDER BY transaction_date DESC
                 """.trimIndent()
@@ -56,14 +56,14 @@ class PledgeController(private val jdbcTemplate: JdbcTemplate) {
     // ========================================================================
     @GetMapping("/history/all")
     fun getPledgeHistoryAll(): ResponseEntity<Any> {
-        val sql = "SELECT * FROM View_Consignment_History ORDER BY transaction_date DESC"
+        val sql = "SELECT * FROM View_Pledge_History ORDER BY transaction_date DESC"
         return ResponseEntity.ok(jdbcTemplate.queryForList(sql))
     }
 
     // ========================================================================
     @PostMapping("/approve/status")
     fun approvePledgeTransaction(@RequestBody req: PledgeApproveRequest): ResponseEntity<Any> {
-        val sql = "EXEC Approve_Consignment_Transaction ?, ?, ?, ?, ?, ?, ?"
+        val sql = "EXEC Approve_Pledge_Transaction ?, ?, ?, ?, ?, ?, ?"
 
         return try {
             jdbcTemplate.update(

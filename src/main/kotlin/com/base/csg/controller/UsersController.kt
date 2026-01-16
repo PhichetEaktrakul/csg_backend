@@ -9,7 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("user")
+@RequestMapping("/api/user")
 class UsersController(
         private val authService: AuthService,
         private val userService: UserService,

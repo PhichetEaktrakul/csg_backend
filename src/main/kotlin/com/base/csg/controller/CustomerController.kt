@@ -9,7 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("customer")
+@RequestMapping("/api/customer")
 class CustomerController(private val jdbcTemplate: JdbcTemplate) {
 
     // ================= Get data of customer-outer By ID ================================================

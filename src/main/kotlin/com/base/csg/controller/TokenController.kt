@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("token")
+@RequestMapping("/api/token")
 class TokenController(@Value("\${myapp.api.url}") private val apiURL: String) {
 
     // ================= Encode JSON to Token =================

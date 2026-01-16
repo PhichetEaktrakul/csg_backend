@@ -5,7 +5,7 @@ import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("admin")
+@RequestMapping("/api/admin")
 class AdminDashboardController(private val jdbcTemplate: JdbcTemplate) {
 
     // ===========================================================================================
@@ -13,7 +13,7 @@ class AdminDashboardController(private val jdbcTemplate: JdbcTemplate) {
     fun getMonitoringTicketsByID(@PathVariable id: String): ResponseEntity<Any> {
         val sql =
                 """
-                SELECT * FROM View_Consignment_Ticket
+                SELECT * FROM View_Pledge_Ticket
                 WHERE status = 'active'
                 AND end_date >= CAST(GETDATE() AS DATE)
                 AND customer_id = ?
@@ -29,7 +29,7 @@ class AdminDashboardController(private val jdbcTemplate: JdbcTemplate) {
     fun getMonitoringTicketsAll(): ResponseEntity<Any> {
         val sql =
                 """
-                SELECT * FROM View_Consignment_Ticket
+                SELECT * FROM View_Pledge_Ticket
                 WHERE status = 'active'
                 AND end_date >= CAST(GETDATE() AS DATE)
                 ORDER BY transaction_date DESC
